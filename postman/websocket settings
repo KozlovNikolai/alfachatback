@@ -1,0 +1,4 @@
+wss://localhost:8443/auth/subscribe/{{pubsub}}
+Headers:
+Authorization - {{token}}
+
