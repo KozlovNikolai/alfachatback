@@ -6,10 +6,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/KozlovNikolai/pfp/internal/chat/constants"
-	"github.com/KozlovNikolai/pfp/internal/chat/domain"
-	"github.com/KozlovNikolai/pfp/internal/chat/repository/models"
-	"github.com/KozlovNikolai/pfp/internal/pkg/pg"
+	"alfachatback/internal/chat/constants"
+	"alfachatback/internal/chat/domain"
+	"alfachatback/internal/chat/repository/models"
+	"alfachatback/internal/pkg/pg"
 )
 
 // UserRepo ...

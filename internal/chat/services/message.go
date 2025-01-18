@@ -3,7 +3,7 @@ package services
 import (
 	"context"
 
-	"github.com/KozlovNikolai/pfp/internal/chat/domain"
+	"alfachatback/internal/chat/domain"
 )
 
 type MessageService struct {

@@ -1,8 +1,8 @@
 package staterepo
 
 import (
-	"github.com/KozlovNikolai/pfp/internal/chat/domain"
-	"github.com/KozlovNikolai/pfp/internal/chat/repository/models"
+	"alfachatback/internal/chat/domain"
+	"alfachatback/internal/chat/repository/models"
 )
 
 // type State struct {

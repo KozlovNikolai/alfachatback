@@ -6,10 +6,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/KozlovNikolai/pfp/internal/chat/constants"
-	"github.com/KozlovNikolai/pfp/internal/chat/domain"
-	"github.com/KozlovNikolai/pfp/internal/chat/transport/httpserver/middlewares"
-	"github.com/KozlovNikolai/pfp/internal/pkg/utils"
+	"alfachatback/internal/chat/constants"
+	"alfachatback/internal/chat/domain"
+	"alfachatback/internal/chat/transport/httpserver/middlewares"
+	"alfachatback/internal/pkg/utils"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )

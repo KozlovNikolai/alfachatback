@@ -6,8 +6,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/KozlovNikolai/pfp/internal/chat/domain"
-	"github.com/KozlovNikolai/pfp/internal/chat/repository/models"
+	"alfachatback/internal/chat/domain"
+	"alfachatback/internal/chat/repository/models"
+
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 )

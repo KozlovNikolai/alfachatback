@@ -2,9 +2,9 @@
 package main
 
 import (
-	_ "github.com/KozlovNikolai/pfp/docs"
-	"github.com/KozlovNikolai/pfp/internal/chat/transport/httpserver"
-	"github.com/KozlovNikolai/pfp/internal/pkg/config"
+	_ "alfachatback/docs"
+	"alfachatback/internal/chat/transport/httpserver"
+	"alfachatback/internal/pkg/config"
 )
 
 // @title 	Chat Service API

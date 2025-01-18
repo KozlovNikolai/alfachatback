@@ -1,0 +1,962 @@
+{
+	"info": {
+		"_postman_id": "9bd51dab-65a1-4b71-bb90-9c1173ed4685",
+		"name": "alfachat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32925668"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "signup admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profile\":\"system\",\n  \"login\": \"root@admin.ru\",\n  \"password\": \"123456\",\n  \"name\":\"admin\",\n  \"surname\":\"root\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/signup",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);",
+									"postman.setEnvironmentVariable(\"pubsub\", jsonData.pubsub);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profile\":\"system\",\n  \"login\": \"root@admin.ru\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/signin",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create system chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"common chat\",\n    \"chat_type\":\"system\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/createChat",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"createChat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get states",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"common chat\",\n    \"chat_type\":\"system\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/admin/states?limit=10&offset=0",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"admin",
+								"states"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host_port}}/admin/users?limit=10&offset=0",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User service",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profile\":\"email\",\n  \"login\": \"cmd@cmd.ru\",\n  \"password\": \"123456\",\n  \"name\":\"Donald\",\n  \"surname\":\"Trump\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/signup",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);",
+									"postman.setEnvironmentVariable(\"pubsub\", jsonData.pubsub);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profile\":\"email\",\n  \"login\": \"cmd@cmd.ru\",\n  \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/signin",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sputnik/login Коля",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);",
+									"postman.setEnvironmentVariable(\"pubsub\", jsonData.pubsub);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNSwiZXhwIjoxNzM5MTM3MDc3LCJqdGkiOiI2OWQxOGI0OS0zZjFkLTQ5NDUtODQyMy0zZDMzMGE5YWY1MjYifQ.7x0AJg3dG306FCGufT6dy3EnBCNGDLPOwkGSRbiFKng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Application",
+								"value": "Sputnik51",
+								"type": "text"
+							},
+							{
+								"key": "user-id",
+								"value": "1234560",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host_port}}/sputnik/login",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"sputnik",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/sputnik/login Паша",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token);",
+									"postman.setEnvironmentVariable(\"pubsub\", jsonData.pubsub);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJleHAiOjE3MzY2NjcwMjEsImp0aSI6ImFjM2U2ZTQ0LWE0OGUtNDg3Ny1hMGQ1LTY1MTMyOTQwMjIzMSJ9.D1PcxCOH2i5GrgCq189cs19XZtF4NN5Q4NI8VO-Yd2A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Application",
+								"value": "Sputnik51",
+								"type": "text"
+							},
+							{
+								"key": "user-id",
+								"value": "1234560",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host_port}}/sputnik/login",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"sputnik",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add contact to account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\":2,\n    \"role\":\"Contact\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/addContactToAccount",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"addContactToAccount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host_port}}/auth/getContacts",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"getContacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host_port}}/auth/signout/{{pubsub}}",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"signout",
+								"{{pubsub}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat service",
+			"item": [
+				{
+					"name": "create any chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"My mega chat\",\n    \"chat_type\":\"regular\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/createChat",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"createChat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create private chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_two_id\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/createPrivateChat",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"createPrivateChat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chats",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host_port}}/auth/getChats",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"getChats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enter to chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host_port}}/auth/enter/{{pubsub}}?chat_id=1",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"enter",
+								"{{pubsub}}"
+							],
+							"query": [
+								{
+									"key": "chat_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add user to chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_id\":2,\n    \"user_id\":4,\n    \"role\":\"Regular\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/addToChat",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"addToChat"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message service",
+			"item": [
+				{
+					"name": "send msg",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_id\":2,\n    \"msg_type\":\"nop\",\n    \"text\":\"fourth message\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/sendmsg",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"sendmsg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get msgs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_id\":1,\n    \"msg_type\":\"nop\",\n    \"limit\":20,\n    \"offset\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/getmsgs",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"getmsgs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get chat msgs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chat_id\":1,\n    \"initial_msg_id\":14,\n    \"before\":3,\n    \"after\":3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host_port}}/auth/getchatmsgs",
+							"protocol": "http",
+							"host": [
+								"{{host_port}}"
+							],
+							"path": [
+								"auth",
+								"getchatmsgs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

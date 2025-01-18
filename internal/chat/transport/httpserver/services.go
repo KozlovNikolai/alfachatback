@@ -1,6 +1,6 @@
 package httpserver
 
-import "github.com/KozlovNikolai/pfp/internal/chat/transport/ws"
+import "alfachatback/internal/chat/transport/ws"
 
 // HTTPServer is a HTTP server for ports
 type HTTPServer struct {

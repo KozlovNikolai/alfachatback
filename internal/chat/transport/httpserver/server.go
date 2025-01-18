@@ -16,13 +16,13 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/zap"
 
-	"github.com/KozlovNikolai/pfp/internal/chat/repository/pgrepo"
-	"github.com/KozlovNikolai/pfp/internal/chat/repository/staterepo"
-	"github.com/KozlovNikolai/pfp/internal/chat/services"
-	"github.com/KozlovNikolai/pfp/internal/chat/transport/httpserver/middlewares"
-	"github.com/KozlovNikolai/pfp/internal/chat/transport/ws"
-	"github.com/KozlovNikolai/pfp/internal/pkg/config"
-	"github.com/KozlovNikolai/pfp/internal/pkg/pg"
+	"alfachatback/internal/chat/repository/pgrepo"
+	"alfachatback/internal/chat/repository/staterepo"
+	"alfachatback/internal/chat/services"
+	"alfachatback/internal/chat/transport/httpserver/middlewares"
+	"alfachatback/internal/chat/transport/ws"
+	"alfachatback/internal/pkg/config"
+	"alfachatback/internal/pkg/pg"
 )
 
 // Router is ...

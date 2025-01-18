@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/KozlovNikolai/pfp/internal/pkg/config"
-	"github.com/KozlovNikolai/pfp/internal/pkg/utils"
+	"alfachatback/internal/pkg/config"
+	"alfachatback/internal/pkg/utils"
 )
 
 // AuthorizationHeader ...

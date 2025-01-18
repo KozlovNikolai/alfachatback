@@ -4,9 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/KozlovNikolai/pfp/internal/chat/domain"
-	"github.com/KozlovNikolai/pfp/internal/pkg/config"
-	"github.com/KozlovNikolai/pfp/internal/pkg/utils"
+	"alfachatback/internal/chat/domain"
+	"alfachatback/internal/pkg/config"
+	"alfachatback/internal/pkg/utils"
+
 	"github.com/gin-gonic/gin"
 )
 
